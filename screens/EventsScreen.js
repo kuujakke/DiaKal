@@ -1,18 +1,17 @@
 import React from 'react'
-import CalendarView from '../components/CalendarView'
+import Events from '../components/Events'
 import { View } from 'react-native'
 
-export default class CalendarScreen extends React.Component {
+export default class EventsScreen extends React.Component {
     render () {
         return (
             <View style={{
                 flex: 1,
                 flexGrow: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
                 width: '100%',
+                marginTop: 25
             }}>
-                <CalendarView/>
+                <Events/>
             </View>
         )
     }
