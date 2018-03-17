@@ -5,8 +5,10 @@ import {
     StyleSheet,
 } from 'react-native'
 import { Agenda } from 'react-native-calendars'
+import { initializeEvents } from '../reducers/eventReducer'
+import { connect } from 'react-redux'
 
-export default class AgendaScreen extends Component {
+class Events extends Component {
     constructor (props) {
         super(props)
         this.state = {
@@ -14,7 +16,12 @@ export default class AgendaScreen extends Component {
         }
     }
 
+    async componentDidMount () {
+        await this.props.initializeEvents()
+    }
+
     render () {
+        console.log(this.props.events)
         return (
             <Agenda
                 items={this.state.items}
@@ -36,6 +43,8 @@ export default class AgendaScreen extends Component {
 
     loadItems (day) {
         console.log(day)
+        console.log(this.props.events)
+        return this.props.events
     }
 
     renderItem (item) {
@@ -79,3 +88,18 @@ const styles = StyleSheet.create({
         paddingTop: 30,
     },
 })
+
+const mapStateToProps = (state) => {
+    return {events: state.events}
+}
+
+const mapDispatchToProps = {
+    initializeEvents
+}
+
+const ConnectedEvents = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Events)
+
+export default ConnectedEvents
