@@ -3,26 +3,49 @@ import CalendarScreen from '../screens/CalendarScreen'
 import EventsScreen from '../screens/EventsScreen'
 import { MaterialCommunityIcons } from '@expo/vector-icons/index'
 import React from 'react'
+import NewEventScreen from '../screens/NewEventScreen'
 
 const RootContainer = TabNavigator(
     {
         Calendar: {screen: CalendarScreen},
         Events: {screen: EventsScreen},
+        New: {screen: NewEventScreen},
     },
     {
-        initialRouteName: 'Events',
+        initialRouteName: 'New',
         navigationOptions: ({navigation}) => ({
             tabBarIcon: ({focused, tintColor}) => {
                 const {routeName} = navigation.state
                 let iconName
-                if (routeName === 'Calendar') {
-                    iconName = `calendar`
-                } else if (routeName === 'Events') {
-                    iconName = `calendar-multiple`
+                switch (routeName) {
+                    case 'Calendar':
+                        iconName = `calendar`
+                        break
+                    case 'Events':
+                        iconName = `calendar-multiple`
+                        break
+                    case 'New':
+                        iconName = 'calendar-plus'
+                        break
+                    default:
+                        iconName = 'calendar'
                 }
 
                 return <MaterialCommunityIcons name={iconName} size={35}
                                                color={tintColor}/>
+            },
+            tabBarLabel: ({focused, tintColor}) => {
+                const {routeName} = navigation.state
+                switch (routeName) {
+                    case 'Calendar':
+                        return `Kalenteri`
+                    case 'Events':
+                        return `Tapahtumat`
+                    case 'New':
+                        return 'Uusi'
+                    default:
+                        break
+                }
             },
         }),
         tabBarComponent: TabBarBottom,

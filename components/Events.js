@@ -24,7 +24,7 @@ class Events extends Component {
         console.log(this.props.events)
         return (
             <Agenda
-                items={this.state.items}
+                items={this.props.events}
                 loadItemsForMonth={this.loadItems.bind(this)}
                 renderItem={this.renderItem.bind(this)}
                 renderEmptyDate={this.renderEmptyDate.bind(this)}
