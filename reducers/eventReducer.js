@@ -21,7 +21,10 @@ export const initializeEvents = () => {
 export const createEvent = (event) => {
     return async (dispatch) => {
         const response = await eventService.create(event)
-        dispatch({type: 'INSERT-EVENT', data: event})
+        if (response.success) {
+            dispatch({type: 'INSERT-EVENT', data: event})
+        }
+        return response
     }
 }
 

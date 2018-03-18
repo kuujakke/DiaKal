@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons/index'
 import React from 'react'
 import NewEventScreen from '../screens/NewEventScreen'
 
-const RootContainer = TabNavigator(
+const Navigation = TabNavigator(
     {
         Calendar: {screen: CalendarScreen},
         Events: {screen: EventsScreen},
@@ -59,4 +59,4 @@ const RootContainer = TabNavigator(
     },
 )
 
-export default RootContainer
+export default Navigation

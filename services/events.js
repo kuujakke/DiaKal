@@ -14,8 +14,7 @@ const getAll = async () => {
 
 const create = async (event) => {
     try {
-        const response = await API.put('eventsCRUD', path, event)
-        console.log('Saved event with response:', response)
+        return await API.put('eventsCRUD', path, {body: {...event}})
     } catch (exception) {
         console.log('Something went wrong when saving event!', exception)
     }
