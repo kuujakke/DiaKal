@@ -2,6 +2,40 @@
 apps:
   react-native: !com.amazonaws.mobilehub.v0.AppDO {}
 features:
+  cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic 
+    components:
+      eventsCRUD: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          name: eventsCRUD
+          requires-signin: true
+          sdk-generation-stage-name: Development
+        paths:
+          /events: !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/events-20180318125734.zip
+            description: 'Handler for calls to resource path : /events/{proxy+}'
+            enableCORS: true
+            environment: {}
+            handler: lambda.handler
+            hashcode: HvIANBqDgVxNxt/oyhpMI5Gb9qKDyP6gqgQV4pD87y4=
+            memorySize: '128'
+            modified: '2018-03-18T10:58:06.220+0000'
+            name: events
+            runtime: nodejs6.10
+            timeout: '3'
+            version: 5ztXQxG34ThI7akAD2q0OlgXZ4HFLLhA
+          '/events/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/events-20180318125734.zip
+            description: 'Handler for calls to resource path : /events/{proxy+}'
+            enableCORS: true
+            environment: {}
+            handler: lambda.handler
+            hashcode: HvIANBqDgVxNxt/oyhpMI5Gb9qKDyP6gqgQV4pD87y4=
+            memorySize: '128'
+            modified: '2018-03-18T10:58:06.220+0000'
+            name: events
+            runtime: nodejs6.10
+            timeout: '3'
+            version: sEJmq_MNs1kiAezgYg4wfX2mEDHsKxE2
   database: !com.amazonaws.mobilehub.v0.Database 
     components:
       database-nosql: !com.amazonaws.mobilehub.v0.NoSQLDatabase 
@@ -31,6 +65,23 @@ features:
   mobile-analytics: !com.amazonaws.mobilehub.v0.Pinpoint 
     components:
       analytics: !com.amazonaws.mobilehub.v0.PinpointAnalytics {}
-  sign-in: !com.amazonaws.mobilehub.v0.SignIn {}
+  sign-in: !com.amazonaws.mobilehub.v0.SignIn 
+    attributes:
+      enabled: true
+      optional-sign-in: false
+    components:
+      sign-in-user-pools: !com.amazonaws.mobilehub.v0.UserPoolsIdentityProvider 
+        attributes:
+          alias-attributes:
+            - preferred_username
+            - email
+          mfa-configuration: OFF
+          name: userpool
+          password-policy: !com.amazonaws.mobilehub.ConvertibleMap 
+            min-length: '8'
+            require-lower-case: true
+            require-numbers: false
+            require-symbols: false
+            require-upper-case: true
 name: diakal
 region: eu-central-1

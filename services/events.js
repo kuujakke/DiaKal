@@ -1,13 +1,23 @@
-import firebase from 'firebase'
-import firebaseConfig from '../config/firebase'
+import {API} from 'aws-amplify'
 
-firebase.initializeApp(firebaseConfig)
-const db = firebase.database()
+const path = '/events'
 
 const getAll = async () => {
-    const eventsSnapshot = await db.get('events')
-    console.log('test', eventsSnapshot)
-    return eventsSnapshot
+    try {
+        const events = await API.get('eventsCRUD', path)
+        return events
+    } catch (exception) {
+        console.log('Something went wrong when getting events!', exception)
+    }
 }
 
-export default {getAll}
+const saveEvent = async (event) => {
+    try {
+        const response = await API.put('eventsCRUD', path, event)
+        console.log('Saved event with response:', response)
+    } catch (exception) {
+        console.log('Something went wrong when saving event!', exception)
+    }
+}
+
+export default {getAll, saveEvent}
