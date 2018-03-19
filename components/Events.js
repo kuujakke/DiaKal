@@ -7,6 +7,7 @@ import {
 import { Agenda } from 'react-native-calendars'
 import { initializeEvents } from '../reducers/eventReducer'
 import { connect } from 'react-redux'
+import moment from 'moment'
 
 class Events extends Component {
     constructor (props) {
@@ -21,36 +22,52 @@ class Events extends Component {
     }
 
     render () {
-        console.log(this.props.events)
+
         return (
             <Agenda
-                items={this.props.events}
+                items={this.eventsByDay(this.props.events)}
                 loadItemsForMonth={this.loadItems.bind(this)}
                 renderItem={this.renderItem.bind(this)}
                 renderEmptyDate={this.renderEmptyDate.bind(this)}
                 rowHasChanged={this.rowHasChanged.bind(this)}
+                onCalendarToggled={this.calendarToggle.bind(this)}
                 theme={{
-                    agendaKnobColor: 'teal',
+                    agendaKnobColor: 'gray',
                     agendaDayTextColor: 'teal',
                     agendaDayNumColor: 'teal',
                     agendaTodayColor: 'tomato',
                     selectedDayBackgroundColor: 'teal',
-                    todayTextColor: 'tomato'
+                    todayTextColor: 'tomato',
                 }}
             />
         )
     }
 
+    eventsByDay (events) {
+        let eventsPerDay = {}
+        events.forEach(event => {
+            if (event && !!event.content && !!event.timestamp) {
+                const date = moment(event.timestamp).format('YYYY-MM-DD')
+                if (eventsPerDay[date]) {
+                    eventsPerDay[date] = [...eventsPerDay[date], {...event}]
+                } else {
+                    eventsPerDay[date] = [{...event}]
+                }
+            }
+        })
+        return eventsPerDay
+    }
+
     loadItems (day) {
-        console.log(day)
-        console.log(this.props.events)
-        return this.props.events
+        const daysEvents = this.props.events.filter(
+            e => moment(e.timestamp).isSame(day.timestamp, 'month'))
+        return this.eventsByDay(daysEvents)
     }
 
     renderItem (item) {
         return (
             <View style={[styles.item, {height: item.height}]}>
-                <Text>{item.name}</Text>
+                <Text>{item.content}</Text>
             </View>
         )
     }
@@ -63,13 +80,12 @@ class Events extends Component {
         )
     }
 
-    rowHasChanged (r1, r2) {
-        return r1.name !== r2.name
+    calendarToggle () {
+        console.log(this.props.events)
     }
 
-    timeToString (time) {
-        const date = new Date(time)
-        return date.toISOString().split('T')[0]
+    rowHasChanged (r1, r2) {
+        return r1.content !== r2.content
     }
 }
 
@@ -94,7 +110,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-    initializeEvents
+    initializeEvents,
 }
 
 const ConnectedEvents = connect(
