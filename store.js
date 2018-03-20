@@ -1,13 +1,14 @@
-import {createStore, combineReducers, applyMiddleware} from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
+import { createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers'
 import eventReducer from './reducers/eventReducer'
 import newEventReducer from './reducers/newEventReducer'
 import Navigation from './components/Navigation'
-import { createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers'
+import calculatorReducer from './reducers/calculatorReducer'
 
 const navReducer = (state, action) => {
-  const nextState = Navigation.router.getStateForAction(action, state);
-  return nextState || state;
+    const nextState = Navigation.router.getStateForAction(action, state)
+    return nextState || state
 }
 
 const middleware = createReactNavigationReduxMiddleware(
@@ -18,7 +19,8 @@ const middleware = createReactNavigationReduxMiddleware(
 const reducer = combineReducers({
     events: eventReducer,
     newEvent: newEventReducer,
-    navigation: navReducer
+    navigation: navReducer,
+    calculator: calculatorReducer,
 })
 
 const store = createStore(reducer, applyMiddleware(thunk, middleware))

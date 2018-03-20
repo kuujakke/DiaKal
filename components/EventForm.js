@@ -51,7 +51,7 @@ class EventForm extends Component {
                     onChange={this.onChange}
                     value={this.props.newEvent}
                 />
-                <Button onPress={this.onPress}
+                <Button onPress={this.onPress} title={'Tallenna'}
                         icon={<MaterialCommunityIcons name='database-plus'/>}/>
             </View>
         )

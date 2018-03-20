@@ -1,15 +1,17 @@
+import React from 'react'
 import { TabBarBottom, TabNavigator } from 'react-navigation'
+import { MaterialCommunityIcons } from '@expo/vector-icons/index'
 import CalendarScreen from '../screens/CalendarScreen'
 import EventsScreen from '../screens/EventsScreen'
-import { MaterialCommunityIcons } from '@expo/vector-icons/index'
-import React from 'react'
 import NewEventScreen from '../screens/NewEventScreen'
+import CalculatorScreen from '../screens/CalculatorScreen'
 
 const Navigation = TabNavigator(
     {
         Calendar: {screen: CalendarScreen},
         Events: {screen: EventsScreen},
         New: {screen: NewEventScreen},
+        Calculator: {screen: CalculatorScreen}
     },
     {
         initialRouteName: 'Events',
@@ -27,6 +29,9 @@ const Navigation = TabNavigator(
                     case 'New':
                         iconName = 'calendar-plus'
                         break
+                    case 'Calculator':
+                        iconName = 'calculator'
+                        break
                     default:
                         iconName = 'calendar'
                 }
@@ -43,6 +48,8 @@ const Navigation = TabNavigator(
                         return `Tapahtumat`
                     case 'New':
                         return 'Uusi'
+                    case 'Calculator':
+                        return 'Laskin'
                     default:
                         break
                 }
