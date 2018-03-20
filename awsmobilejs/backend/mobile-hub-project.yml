@@ -11,7 +11,7 @@ features:
           sdk-generation-stage-name: Development
         paths:
           /events: !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/events-20180318221318.zip
+            codeFilename: uploads/events-20180320171712.zip
             description: 'Handler for calls to resource path : /events/{proxy+}'
             enableCORS: true
             environment: {}
@@ -24,7 +24,7 @@ features:
             timeout: '3'
             version: xa9epK0y..1jaWqPsR2m8kcfgQphP0L1
           '/events/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/events-20180318221318.zip
+            codeFilename: uploads/events-20180320171712.zip
             description: 'Handler for calls to resource path : /events/{proxy+}'
             enableCORS: true
             environment: {}

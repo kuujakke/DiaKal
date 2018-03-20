@@ -11,7 +11,7 @@ const eventReducer = (store = [], action) => {
     }
 }
 
-export const initializeEvents = () => {
+export const synchronizeEvents = () => {
     return async (dispatch) => {
         const events = await eventService.getAll()
         dispatch({type: 'INIT-EVENTS', data: events})

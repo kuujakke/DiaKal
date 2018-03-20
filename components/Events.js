@@ -5,7 +5,7 @@ import {
     StyleSheet,
 } from 'react-native'
 import { Agenda } from 'react-native-calendars'
-import { initializeEvents } from '../reducers/eventReducer'
+import { synchronizeEvents } from '../reducers/eventReducer'
 import { connect } from 'react-redux'
 import moment from 'moment'
 
@@ -18,7 +18,7 @@ class Events extends Component {
     }
 
     async componentDidMount () {
-        await this.props.initializeEvents()
+        await this.props.synchronizeEvents()
     }
 
     render () {
@@ -31,6 +31,7 @@ class Events extends Component {
                 renderEmptyDate={this.renderEmptyDate.bind(this)}
                 rowHasChanged={this.rowHasChanged.bind(this)}
                 onCalendarToggled={this.calendarToggle.bind(this)}
+                firstDay={1}
                 theme={{
                     agendaKnobColor: 'gray',
                     agendaDayTextColor: 'teal',
@@ -38,6 +39,9 @@ class Events extends Component {
                     agendaTodayColor: 'tomato',
                     selectedDayBackgroundColor: 'teal',
                     todayTextColor: 'tomato',
+                    textDayFontSize: 16,
+                    textMonthFontSize: 16,
+                    textDayHeaderFontSize: 16
                 }}
             />
         )
@@ -80,7 +84,9 @@ class Events extends Component {
         )
     }
 
-    calendarToggle () {
+    async calendarToggle () {
+        console.log(this.props.events)
+        await this.props.synchronizeEvents()
         console.log(this.props.events)
     }
 
@@ -91,7 +97,7 @@ class Events extends Component {
 
 const styles = StyleSheet.create({
     item: {
-        backgroundColor: 'white',
+        backgroundColor: 'ivory',
         flex: 1,
         borderRadius: 5,
         padding: 10,
@@ -105,12 +111,10 @@ const styles = StyleSheet.create({
     },
 })
 
-const mapStateToProps = (state) => {
-    return {events: state.events}
-}
+const mapStateToProps = (state) => ({events: state.events})
 
 const mapDispatchToProps = {
-    initializeEvents,
+    synchronizeEvents: synchronizeEvents,
 }
 
 const ConnectedEvents = connect(

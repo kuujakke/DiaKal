@@ -3,8 +3,9 @@ import t from 'tcomb-form-native'
 import { Button, View } from 'react-native'
 import { connect } from 'react-redux'
 import { resetNewEvent, setNewEvent } from '../reducers/newEventReducer'
-import { createEvent } from '../reducers/eventReducer'
+import { createEvent, synchronizeEvents } from '../reducers/eventReducer'
 import moment from 'moment'
+import { MaterialCommunityIcons } from '@expo/vector-icons/index'
 
 const Form = t.form.Form
 
@@ -20,7 +21,6 @@ class EventForm extends Component {
     }
 
     onPress = async () => {
-        console.log('tallenna', this.props.newEvent)
         let event = {
             content: this.props.newEvent.content,
             timestamp: Number(moment().format('x')),
@@ -33,11 +33,11 @@ class EventForm extends Component {
             console.log(response.error.message)
         } else if (response.success) {
             this.props.resetNewEvent()
+            this.props.synchronizeEvents()
         }
     }
 
     onChange = (event) => {
-        console.log('onchange')
         this.props.setNewEvent(event)
     }
 
@@ -51,7 +51,8 @@ class EventForm extends Component {
                     onChange={this.onChange}
                     value={this.props.newEvent}
                 />
-                <Button onPress={this.onPress} title={'Tallenna'}/>
+                <Button onPress={this.onPress}
+                        icon={<MaterialCommunityIcons name='database-plus'/>}/>
             </View>
         )
     }
@@ -62,4 +63,4 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps,
-    {setNewEvent, createEvent, resetNewEvent})(EventForm)
+    {setNewEvent, createEvent, resetNewEvent, synchronizeEvents})(EventForm)

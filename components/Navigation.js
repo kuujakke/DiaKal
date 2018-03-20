@@ -12,7 +12,7 @@ const Navigation = TabNavigator(
         New: {screen: NewEventScreen},
     },
     {
-        initialRouteName: 'New',
+        initialRouteName: 'Events',
         navigationOptions: ({navigation}) => ({
             tabBarIcon: ({focused, tintColor}) => {
                 const {routeName} = navigation.state

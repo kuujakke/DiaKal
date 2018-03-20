@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import store from './store'
 import './config/locales'
-import Navigation from './components/Navigation'
+import RootContainer from './components/RootContainer'
 import Amplify from 'aws-amplify'
 import {withAuthenticator} from 'aws-amplify-react-native'
 import aws_exports from './aws-exports'
@@ -16,7 +16,7 @@ class App extends Component {
 
     render () {
         return <Provider store={store}>
-            <Navigation/>
+            <RootContainer/>
         </Provider>
     }
 }
