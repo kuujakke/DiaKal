@@ -7,4 +7,5 @@ Päivämäärä | Tunnit | Mitä tehty?
 17.3.2018 | 12 | Kokeiltu Firebasea ja AWSmobilea. Tehty tabi pohjainen reititys ja agenda näkymä.
 18.3.2018 | 10 | Asennettu AWS Amplify. Tehty tapahtuman lisäämiseen lomake ja yhdistetty sen tila reduxiin.
 19.3.2018 | 5 | Tapahtumat -näytön tila yhdistetty reduxiin ja aws backendiin.
-**Yhteensä:**| **23** |
+20.3.2018 | 8 | Lisätty laskin joka pitää tilaa reduxissa.
+**Yhteensä:**| **46** |
