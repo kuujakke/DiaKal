@@ -28,14 +28,15 @@ LocaleConfig.locales['fi'] = {
         'Marr.',
         'Joul.'],
     dayNames: [
+        'Sunnuntai',
         'Maanantai',
         'Tiistai',
         'Keskiviikko',
         'Torstai',
         'Perjantai',
-        'Lauantai',
-        'Sunnuntai'],
-    dayNamesShort: ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'],
+        'Lauantai'
+    ],
+    dayNamesShort: ['Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'],
 }
 
 LocaleConfig.defaultLocale = 'fi'

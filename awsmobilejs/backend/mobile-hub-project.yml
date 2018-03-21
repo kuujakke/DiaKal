@@ -1,0 +1,87 @@
+--- !com.amazonaws.mobilehub.v0.Project 
+apps:
+  react-native: !com.amazonaws.mobilehub.v0.AppDO {}
+features:
+  cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic 
+    components:
+      eventsCRUD: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          name: eventsCRUD
+          requires-signin: true
+          sdk-generation-stage-name: Development
+        paths:
+          /events: !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/events-20180320171712.zip
+            description: 'Handler for calls to resource path : /events/{proxy+}'
+            enableCORS: true
+            environment: {}
+            handler: lambda.handler
+            hashcode: E+jgDs0FdreyApQ6Rzf7xhvOhZwnhoXipUiYSP/RvPs=
+            memorySize: '128'
+            modified: '2018-03-18T20:13:47.171+0000'
+            name: events
+            runtime: nodejs6.10
+            timeout: '3'
+            version: xa9epK0y..1jaWqPsR2m8kcfgQphP0L1
+          '/events/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/events-20180320171712.zip
+            description: 'Handler for calls to resource path : /events/{proxy+}'
+            enableCORS: true
+            environment: {}
+            handler: lambda.handler
+            hashcode: E+jgDs0FdreyApQ6Rzf7xhvOhZwnhoXipUiYSP/RvPs=
+            memorySize: '128'
+            modified: '2018-03-18T20:13:47.171+0000'
+            name: events
+            runtime: nodejs6.10
+            timeout: '3'
+            version: 4kK8V7eJzk50UkxCpDMji2Azm8J0P0wD
+  database: !com.amazonaws.mobilehub.v0.Database 
+    components:
+      database-nosql: !com.amazonaws.mobilehub.v0.NoSQLDatabase 
+        tables:
+          - !com.amazonaws.mobilehub.v0.NoSQLTable 
+            attributes:
+              content: S
+              dateString: S
+              day: N
+              month: N
+              timestamp: N
+              userId: S
+              year: N
+            hashKeyName: userId
+            hashKeyType: S
+            indexes:
+              - !com.amazonaws.mobilehub.v0.NoSQLIndex 
+                hashKeyName: userId
+                hashKeyType: S
+                indexName: userId-timestamp
+                rangeKeyName: timestamp
+                rangeKeyType: N
+            rangeKeyName: timestamp
+            rangeKeyType: N
+            tableName: ___DYNAMIC_PREFIX___-events
+            tablePrivacy: private
+  mobile-analytics: !com.amazonaws.mobilehub.v0.Pinpoint 
+    components:
+      analytics: !com.amazonaws.mobilehub.v0.PinpointAnalytics {}
+  sign-in: !com.amazonaws.mobilehub.v0.SignIn 
+    attributes:
+      enabled: true
+      optional-sign-in: false
+    components:
+      sign-in-user-pools: !com.amazonaws.mobilehub.v0.UserPoolsIdentityProvider 
+        attributes:
+          alias-attributes:
+            - preferred_username
+            - email
+          mfa-configuration: OFF
+          name: userpool
+          password-policy: !com.amazonaws.mobilehub.ConvertibleMap 
+            min-length: '8'
+            require-lower-case: true
+            require-numbers: false
+            require-symbols: false
+            require-upper-case: true
+name: diakal
+region: eu-central-1
