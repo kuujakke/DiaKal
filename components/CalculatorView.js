@@ -12,8 +12,7 @@ import {
 } from 'native-base'
 import { connect } from 'react-redux'
 import {
-    setBloodGlucose, setCalculatedDose,
-    setEffectiveness,
+    setBloodGlucose, setCarbohydrates, setEffectiveness, setTargetBloodGlucose,
 } from '../reducers/calculatorReducer'
 import * as Vibration from 'react-native/Libraries/Vibration/Vibration'
 
@@ -23,7 +22,8 @@ class CalculatorView extends Component {
     }
 
     effectivenessPercentageString () {
-        const percentage = (this.props.calculator.effectiveness - 1) * 100
+        const percentage = Math.round((this.props.calculator.effectiveness -
+            1) * 100)
         if (percentage >= 1) {
             return `+${percentage} %`
         }
@@ -32,19 +32,14 @@ class CalculatorView extends Component {
 
     onBloodGlucoseChange = async (bloodGlucose) => {
         await this.props.setBloodGlucose(bloodGlucose)
-        this.calculateDose()
     }
 
-    calculateDose () {
-        const effectiveness = this.props.calculator.effectiveness
-        const bloodGlucose = this.props.calculator.bloodGlucose
-        const BaseInsulinEffect = 2
-        const targetBloodGlucose = 5
-        const insulinEffectiveness = BaseInsulinEffect * effectiveness
-        const excessGlucose = bloodGlucose - targetBloodGlucose
-        const calculatedDose = excessGlucose / insulinEffectiveness
-        const roundedDose = Math.round(calculatedDose  * 2) / 2
-        this.props.setCalculatedDose(roundedDose)
+    onTargetBloodGlucoseChange = async (targetBloodGlucose) => {
+        await this.props.setTargetBloodGlucose(targetBloodGlucose)
+    }
+
+    onCarbohydratesChange = async (carbohydrates) => {
+        await this.props.setCarbohydrates(carbohydrates)
     }
 
     render () {
@@ -61,11 +56,10 @@ class CalculatorView extends Component {
                                 value={this.props.calculator.effectiveness}
                                 minimumValue={0}
                                 maximumValue={2}
-                                step={0.25}
+                                step={0.05}
                                 onValueChange={async (v) => {
-                                        await this.props.setEffectiveness(v)
-                                        this.calculateDose()
-                                    }
+                                    await this.props.setEffectiveness(v)
+                                }
                                 }
                                 onSlidingComplete={
                                     () => {
@@ -78,26 +72,57 @@ class CalculatorView extends Component {
                             />
                         </ListItem>
                         <ListItem>
-                            <Text>{this.effectivenessPercentageString()}</Text>
+                            <Text
+                                style={textStyle}>{this.effectivenessPercentageString()}</Text>
                         </ListItem>
                         <Separator>
-                            <Text style={separatorStyle}>MITATTU
-                                VERENSOKERI</Text>
+                            <Text style={separatorStyle}>VERENSOKERI</Text>
                         </Separator>
                         <ListItem>
-                            <Form>
-                                <Item stackedLabel>
-                                    <Label>Mmol/l</Label>
-                                    <Input keyboardType={'numeric'}
-                                           onChangeText={this.onBloodGlucoseChange}/>
-                                </Item>
-                            </Form>
+                            <Content>
+                                <Form>
+                                    <Item fixedLabel>
+                                        <Label style={textStyle}>Mmol/l</Label>
+                                        <Input keyboardType={'numeric'}
+                                               onChangeText={this.onBloodGlucoseChange}
+                                               style={textStyle}
+                                        />
+                                    </Item>
+                                    <Item fixedLabel last>
+                                        <Label style={textStyle}>Tavoite
+                                            Mmol/l</Label>
+                                        <Input keyboardType={'numeric'}
+                                               onChangeText={this.onTargetBloodGlucoseChange}
+                                               style={textStyle}
+                                               defaultValue={this.props.calculator.targetBloodGlucose.toString()}
+                                        />
+                                    </Item>
+                                </Form>
+                            </Content>
+                        </ListItem>
+                        <Separator>
+                            <Text style={separatorStyle}>HIILIHYDRAATIT</Text>
+                        </Separator>
+                        <ListItem>
+                            <Content>
+                                <Form>
+                                    <Item fixedLabel>
+                                        <Label style={textStyle}>Grammaa</Label>
+                                        <Input keyboardType={'numeric'}
+                                               onChangeText={this.onCarbohydratesChange}
+                                               style={textStyle}
+                                        />
+                                    </Item>
+                                </Form>
+                            </Content>
                         </ListItem>
                         <Separator>
                             <Text style={separatorStyle}>INSULIINIANNOS</Text>
                         </Separator>
                         <ListItem>
-                            <Text>{this.props.calculator.calculatedDose}</Text>
+                            <Text
+                                style={textStyle}>{Math.round(this.props.calculator.insulinUnits *
+                                10) / 10}</Text>
                         </ListItem>
                     </List>
                 </Content>
@@ -108,11 +133,18 @@ class CalculatorView extends Component {
 
 const separatorStyle = {fontSize: 20}
 
+const textStyle = {fontSize: 20}
+
 const mapStateToProps = (state) => ({calculator: state.calculator})
 
 const ConnectedCalculatorView = connect(
     mapStateToProps,
-    {setEffectiveness, setBloodGlucose, setCalculatedDose},
+    {
+        setEffectiveness,
+        setBloodGlucose,
+        setCarbohydrates,
+        setTargetBloodGlucose,
+    },
 )(CalculatorView)
 
 export default ConnectedCalculatorView
