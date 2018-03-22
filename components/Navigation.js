@@ -1,17 +1,17 @@
 import React from 'react'
 import { TabBarBottom, TabNavigator } from 'react-navigation'
 import { MaterialCommunityIcons } from '@expo/vector-icons/index'
-import CalendarScreen from '../screens/CalendarScreen'
 import EventsScreen from '../screens/EventsScreen'
 import NewEventScreen from '../screens/NewEventScreen'
 import CalculatorScreen from '../screens/CalculatorScreen'
+import SettingsScreen from '../screens/SettingsScreen'
 
 const Navigation = TabNavigator(
     {
-        Calendar: {screen: CalendarScreen},
         Events: {screen: EventsScreen},
         New: {screen: NewEventScreen},
-        Calculator: {screen: CalculatorScreen}
+        Calculator: {screen: CalculatorScreen},
+        Settings: {screen: SettingsScreen}
     },
     {
         initialRouteName: 'Events',
@@ -20,9 +20,6 @@ const Navigation = TabNavigator(
                 const {routeName} = navigation.state
                 let iconName
                 switch (routeName) {
-                    case 'Calendar':
-                        iconName = `calendar`
-                        break
                     case 'Events':
                         iconName = `calendar-multiple`
                         break
@@ -31,6 +28,9 @@ const Navigation = TabNavigator(
                         break
                     case 'Calculator':
                         iconName = 'calculator'
+                        break
+                    case 'Settings':
+                        iconName = 'settings'
                         break
                     default:
                         iconName = 'calendar'
@@ -42,14 +42,14 @@ const Navigation = TabNavigator(
             tabBarLabel: ({focused, tintColor}) => {
                 const {routeName} = navigation.state
                 switch (routeName) {
-                    case 'Calendar':
-                        return `Kalenteri`
                     case 'Events':
                         return `Tapahtumat`
                     case 'New':
                         return 'Uusi'
                     case 'Calculator':
                         return 'Laskin'
+                    case 'Settings':
+                        return 'Asetukset'
                     default:
                         break
                 }
