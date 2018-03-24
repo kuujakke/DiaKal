@@ -1,19 +1,29 @@
 import React from 'react'
-import { Form, Input, Item, Label } from 'native-base'
+import { Content, Form, Input, Item, Label, Text } from 'native-base'
 
-const InputField = ({label}) => {
+const InputField = ({label, subtext}) => {
     return (
-        <Form style={{width: '100%', justifyContent: 'center', alignItems: 'center', flex: 1}}>
-            <Item floatingLabel rounded>
-                <Label style={{
-                    textAlign: 'center',
-                    fontSize: 20,
-                    padding: 2
-                }}>{label}</Label>
-                <Input keyboardType={'numeric'}
-                       textAlign={'center'} maxLength={3}/>
-            </Item>
-        </Form>
+        <Content style={{flex: 1, padding: 5}}>
+            <Label style={{
+                textAlign: 'center',
+                justifyContent: 'center',
+                fontSize: 20,
+            }}>{label}</Label>
+            <Form style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}>
+                <Item rounded>
+                    <Input keyboardType={'numeric'}
+                           textAlign={'center'} maxLength={3}/>
+                </Item>
+            </Form>
+            <Text style={{
+                fontSize: 10,
+                color: 'gray',
+                textAlign: 'center',
+            }}>{subtext}</Text>
+        </Content>
     )
 }
 
