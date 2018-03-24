@@ -10,4 +10,5 @@ Päivämäärä | Tunnit | Mitä tehty?
 20.3.2018 | 8 | Lisätty laskin joka pitää tilaa reduxissa.
 21.2.2018 | 5 | Täydennetty laskimen toiminnallisuutta.
 22.2.2018 | 5 | Lisätty asetusikkuna ja tyylitelty tiedonsyöttö komponenttia.
-**Yhteensä:**| **56** |
+24.2.2018 | 6 | Toteutettu asetusten tallentaminen s3:een tiedostona.
+**Yhteensä:**| **62** |
