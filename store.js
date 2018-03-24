@@ -5,6 +5,7 @@ import eventReducer from './reducers/eventReducer'
 import newEventReducer from './reducers/newEventReducer'
 import Navigation from './components/Navigation'
 import calculatorReducer from './reducers/calculatorReducer'
+import settingsReducer from './reducers/settingsReducer'
 
 const navReducer = (state, action) => {
     const nextState = Navigation.router.getStateForAction(action, state)
@@ -21,6 +22,7 @@ const reducer = combineReducers({
     newEvent: newEventReducer,
     navigation: navReducer,
     calculator: calculatorReducer,
+    settings: settingsReducer,
 })
 
 const store = createStore(reducer, applyMiddleware(thunk, middleware))

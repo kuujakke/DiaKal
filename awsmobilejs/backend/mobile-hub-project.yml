@@ -11,31 +11,31 @@ features:
           sdk-generation-stage-name: Development
         paths:
           /events: !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/events-20180320171712.zip
+            codeFilename: uploads/events-20180324212736.zip
             description: 'Handler for calls to resource path : /events/{proxy+}'
             enableCORS: true
             environment: {}
             handler: lambda.handler
-            hashcode: E+jgDs0FdreyApQ6Rzf7xhvOhZwnhoXipUiYSP/RvPs=
+            hashcode: Ztn+l9vL6+3Rr8wIU7El1cswXtEBi34CzD8Y5LKTkw4=
             memorySize: '128'
-            modified: '2018-03-18T20:13:47.171+0000'
+            modified: '2018-03-24T19:28:17.163+0000'
             name: events
             runtime: nodejs6.10
             timeout: '3'
-            version: xa9epK0y..1jaWqPsR2m8kcfgQphP0L1
+            version: ceMOA76FtJ3BCAh3m16lfxaOzfbgZM4I
           '/events/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/events-20180320171712.zip
+            codeFilename: uploads/events-20180324212736.zip
             description: 'Handler for calls to resource path : /events/{proxy+}'
             enableCORS: true
             environment: {}
             handler: lambda.handler
-            hashcode: E+jgDs0FdreyApQ6Rzf7xhvOhZwnhoXipUiYSP/RvPs=
+            hashcode: Ztn+l9vL6+3Rr8wIU7El1cswXtEBi34CzD8Y5LKTkw4=
             memorySize: '128'
-            modified: '2018-03-18T20:13:47.171+0000'
+            modified: '2018-03-24T19:28:17.163+0000'
             name: events
             runtime: nodejs6.10
             timeout: '3'
-            version: 4kK8V7eJzk50UkxCpDMji2Azm8J0P0wD
+            version: 9UbnuTt9YzheyXTMZPmYSFMXfSAT.o_O
   database: !com.amazonaws.mobilehub.v0.Database 
     components:
       database-nosql: !com.amazonaws.mobilehub.v0.NoSQLDatabase 
@@ -83,5 +83,11 @@ features:
             require-numbers: false
             require-symbols: false
             require-upper-case: true
+  user-files: !com.amazonaws.mobilehub.v0.UserFiles 
+    attributes:
+      enabled: true
+  user-profiles: !com.amazonaws.mobilehub.v0.UserSettings 
+    attributes:
+      enabled: true
 name: diakal
 region: eu-central-1

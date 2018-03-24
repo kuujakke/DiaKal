@@ -8,4 +8,7 @@ Päivämäärä | Tunnit | Mitä tehty?
 18.3.2018 | 10 | Asennettu AWS Amplify. Tehty tapahtuman lisäämiseen lomake ja yhdistetty sen tila reduxiin.
 19.3.2018 | 5 | Tapahtumat -näytön tila yhdistetty reduxiin ja aws backendiin.
 20.3.2018 | 8 | Lisätty laskin joka pitää tilaa reduxissa.
-**Yhteensä:**| **46** |
+21.2.2018 | 5 | Täydennetty laskimen toiminnallisuutta.
+22.2.2018 | 5 | Lisätty asetusikkuna ja tyylitelty tiedonsyöttö komponenttia.
+24.2.2018 | 6 | Toteutettu asetusten tallentaminen s3:een tiedostona.
+**Yhteensä:**| **62** |
