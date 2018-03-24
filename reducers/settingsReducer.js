@@ -1,3 +1,5 @@
+import settingsService from '../services/settings'
+
 const settingsReducer = (store = {}, action) => {
     switch (action.type) {
         case 'INIT-SETTINGS':
@@ -7,9 +9,16 @@ const settingsReducer = (store = {}, action) => {
         case 'SET-CARBOHYDRATES-EFFECTIVENESS':
             return {...store, carbohydratesEffectiveness: action.data}
         case 'SET-DEFAULT-TARGET-BLOOD-GLUCOSE':
-            return {...store, targetDefaultBloodGlucose: action.data}
+            return {...store, defaultTargetBloodGlucose: action.data}
         default:
             return store
+    }
+}
+
+export const initializeSettings = () => {
+    return async (dispatch) => {
+        const settings = await settingsService.getSettings()
+        dispatch({type: 'INIT-SETTINGS', data: settings})
     }
 }
 

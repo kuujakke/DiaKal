@@ -1,7 +1,7 @@
 import React from 'react'
 import { Content, Form, Input, Item, Label, Text } from 'native-base'
 
-const InputField = ({label, subtext}) => {
+const InputField = ({label, subtext, value, onChange}) => {
     return (
         <Content style={{flex: 1, padding: 5}}>
             <Label style={{
@@ -15,7 +15,12 @@ const InputField = ({label, subtext}) => {
             }}>
                 <Item rounded>
                     <Input keyboardType={'numeric'}
-                           textAlign={'center'} maxLength={3}/>
+                           textAlign={'center'}
+                           maxLength={3}
+                           value={value ? value.toString() : ''}
+                           onChangeText={onChange}
+                           style={{fontSize: 20}}
+                    />
                 </Item>
             </Form>
             <Text style={{
