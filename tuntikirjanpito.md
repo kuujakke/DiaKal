@@ -11,4 +11,5 @@ Päivämäärä | Tunnit | Mitä tehty?
 21.2.2018 | 5 | Laskimeen lisätty hiilihydraatit ja tavoite verensokeri. Julkaistu projekti expossa testausta varten.
 22.2.2018 | 5 | Lisätty asetusikkuna ja tyylitelty tiedonsyöttö komponenttia.
 24.2.2018 | 6 | Toteutettu asetusten tallentaminen s3:een tiedostona.
-**Yhteensä:**| **62** |
+26.2.2018 | 4 | Refaktoroitu laskinta ja eriytetty liukusäädin omaksi komponentiksi.
+**Yhteensä:**| **66** |
